@@ -22,7 +22,18 @@ public struct JSVSwiftUISideMenu<Content: View, SideBarContent: View>: View {
     /// The side menu view
     public var sideBar: SideBarContent
 
+    public init(showMenu: Binding<Bool>,
+                contentView: Content,
+                sideBarView: SideBarContent,
+                sideBarWidthMultiplier: Double) {
+        self._showMenu = showMenu
+        self.content = contentView
+        self.sideBar = sideBarView
+        self.sideBarWidthMultiplier = sideBarWidthMultiplier
+    }
+
     public var body: some View {
+        
         let drag = DragGesture()
             .onChanged {
                 openMenuValue = $0.translation.width
